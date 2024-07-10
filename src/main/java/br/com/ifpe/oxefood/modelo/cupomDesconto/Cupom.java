@@ -1,4 +1,4 @@
-package br.com.ifpe.oxefood.modelo.cliente;
+package br.com.ifpe.oxefood.modelo.cupomDesconto;
 
 import java.time.LocalDate;
 import org.hibernate.annotations.SQLRestriction;
@@ -13,28 +13,29 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "Cliente")
+@Table(name = "CupomDesconto")
 @SQLRestriction("habilitado = true")
 @Builder
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Cliente extends EntidadeAuditavel  {
-  
-   @Column
-   private String nome;
 
-   @Column
-   private LocalDate dataNascimento;
+public class Cupom extends EntidadeAuditavel {
+    
+        @Column
+        private String codigo;
 
-   @Column /*(unique = true) podemos usar essa restrição se necessário*/
-   private String cpf;
+        @Column
+        private String descricao;
 
-   @Column
-   private String foneCelular;
-
-   @Column
-   private String foneFixo;
-
+        @Column
+        private double valorDesconto;
+    
+        @Column
+        private LocalDate dataValidade;
+    
+        @Column
+        private int qtdMaximaUsos;
+    
 }

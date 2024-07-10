@@ -7,9 +7,6 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.ifpe.oxefood.modelo.cliente.Cliente;
-
-
 @Service
 public class ProdutoService {
 

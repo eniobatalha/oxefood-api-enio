@@ -45,6 +45,7 @@ public class EntregadorService {
         entregador.setDataNascimento(entregadorAlterado.getDataNascimento());
         entregador.setFoneCelular(entregadorAlterado.getFoneCelular());
         entregador.setFoneFixo(entregadorAlterado.getFoneFixo());
+        entregador.setQtdEntregasRealizadas(entregadorAlterado.getQtdEntregasRealizadas());
         entregador.setVersao(entregador.getVersao() + 1);
         repository.save(entregador);
     }
