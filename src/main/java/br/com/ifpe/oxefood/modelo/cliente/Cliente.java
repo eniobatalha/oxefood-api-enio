@@ -3,13 +3,20 @@ package br.com.ifpe.oxefood.modelo.cliente;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.SQLRestriction;
+
+import br.com.ifpe.oxefood.modelo.acesso.Usuario;
 import br.com.ifpe.oxefood.util.entity.EntidadeAuditavel;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,22 +33,31 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Cliente extends EntidadeAuditavel {
 
-   @OneToMany(mappedBy = "cliente", orphanRemoval = true, fetch = FetchType.EAGER)
-   private List<EnderecoCliente> enderecos;
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Usuario usuario;
 
-   @Column (nullable = false, length = 100)
-   private String nome;
+    @OneToMany(mappedBy = "cliente", orphanRemoval = true, fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SUBSELECT)
+    private List<EnderecoCliente> enderecos;
 
-   @Column
-   private LocalDate dataNascimento;
-   
-   @Column (unique = true)
-   private String cpf;
+    @Column(nullable = false, length = 100)
+    private String nome;
 
-   @Column
-   private String foneCelular;
+    @Column(nullable = false, unique = true)
+    @Email
+    private String email;
 
-   @Column
-   private String foneFixo;
+    @Column
+    private LocalDate dataNascimento;
 
+    @Column(unique = true)
+    private String cpf;
+
+    @Column
+    private String foneCelular;
+
+    @Column
+    private String foneFixo;
+    
 }

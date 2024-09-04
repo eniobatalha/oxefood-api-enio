@@ -1,6 +1,7 @@
 package br.com.ifpe.oxefood.api.cliente;
 
 import br.com.ifpe.oxefood.modelo.cliente.Cliente;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -26,6 +27,10 @@ public class ClienteRequest {
     @Length(max = 100, message = "O nome do cliente deve ter no máximo {max} caracteres.")
     private String nome;
 
+    @NotBlank(message = "O e-mail do cliente é de preenchimento obrigatório.")
+    @Email
+    private String email;
+
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataNascimento;
 
@@ -43,6 +48,7 @@ public class ClienteRequest {
 
         return Cliente.builder()
                 .nome(nome)
+                .email(email)
                 .dataNascimento(dataNascimento)
                 .cpf(cpf)
                 .foneCelular(foneCelular)
